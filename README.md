@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/76763bf1-152b-45ed-bfb4-269f440f1ad7)# Event-Driven-Board
+# Event-Driven-Board
 
 Board 관련하여, Article, Comment, Like, Unlike, Hot Article(인기글), article read(게시글 조회)의 기능을 MicroService 기반으로 설계 및 구현을 한다.
 Kafka, Redis를 사용하여 해당 프로그램은 Docker로 실행하여 진행한다.
