@@ -177,7 +177,7 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 - 전달 받은 Article Id에 해당되는 Article 데이터를 반환 한다.
 - Board Id, page, pageSize에 해당되는 Article 데이터들을 반환한다.
 
-### 상세 설계
+### 상세 설계 내용
 
 - Article 생성, 삭제, Like, UnLike, Update 및 Comment 생성, 삭제 Event 발생시 해당 데이터를 ArticleModelQuery Object 를 JsonString 으로 변환해
   Redis에 저장한다.
