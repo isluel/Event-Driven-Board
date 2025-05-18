@@ -36,7 +36,9 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 - Board Id에 해당되는 Article의 개수를 반환한다.
 - Article 추가, 수정, 삭제시 생성 내용을 Kafka로 전달한다.
 
-### 흐름도도
+### 흐름도
+
+### Repository
 
 ## Comment Service
 
@@ -64,6 +66,8 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 
 ### 흐름도
 
+### Repository
+
 ## Article Like Service
 
 ### 요구사항 정의
@@ -81,6 +85,8 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
   해당 내용은 Kafka를 통해 전달한다.
 
 ### 흐름도
+
+### Repository
 
 ## Article View Service
 
@@ -100,6 +106,8 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 - DB에 backup 수행시 해당 내역을 Kafka로 전달하도록 한다.
 
 ### 흐름도
+
+### Repository
 
 ## Hot Article Service
 
@@ -122,6 +130,8 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 
 ### 흐름도
 
+### Repository
+
 ## Article Read Service
 
 ### 요구사항 정의
@@ -141,3 +151,4 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 
 ### 흐름도
 
+### Repository
