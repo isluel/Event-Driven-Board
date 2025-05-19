@@ -72,7 +72,7 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 - 한 depth 당 5글자로 표시
 - 대소문자 문자열 비교를 위해 path column의 collate를 buf8mb4_bin 으로 설정.
 - path 우선 순위: 0~9 < A~Z < a~z
-![image](https://github.com/user-attachments/assets/f15b1bff-398f-46ca-9264-397989c76aa4)
+  ![image](https://github.com/user-attachments/assets/f15b1bff-398f-46ca-9264-397989c76aa4)
 
 
 ### 흐름도
