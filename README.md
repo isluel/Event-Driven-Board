@@ -1,12 +1,13 @@
 # Event-Driven-Board
 
-Board 관련하여, Article, Comment, Like, Unlike, Hot Article(인기글), article read(게시글 조회)의 기능을 MicroService 기반으로 설계 및 구현을 한다.
+Board 관련하여, Article, Comment, Like, Hate, Hot Article(인기글), article read(게시글 조회)의 기능을 MicroService 기반으로 설계 및 구현을 한다.
 Kafka, Redis를 사용하여 해당 프로그램은 Docker로 실행하여 진행한다.
 
 ## Total
 
 ### 흐름도
-![image](https://github.com/user-attachments/assets/2c500b82-9faa-4400-871f-345b24e83c7b)
+![image](https://github.com/user-attachments/assets/2ff3d9aa-289f-426b-9a83-6990d4de9450)
+
 
 ### 사용 환경
 
@@ -153,22 +154,22 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 
 ### 상세 설계 내용
 
-- Article, Comment, Article Like, Article View Service에서 이벤트 발생시 전달한 Kafka의 Topic 데이터를 읽어서 처리 한다.
-- Article Create, Article Update, Aritcle Delete, Comment Create, delete, Article Like, Article UnLike, Articcle View
-  이벤트 발생시 Kafka의 각 Topic으로 데이터 전송한다.
+- Article, Comment, Article Like, Article Hate, Article View Service에서 이벤트 발생시 전달한 Kafka의 Topic 데이터를 읽어서 처리 한다.
+-  Article Create, Article Update, Aritcle Delete, Comment Create, delete, Article Like, Article UnLike, Article Hate, Article Unhate, Article View 이벤트 발생시 Kafka의 각 Topic으로 데이터 전송한다.
   Article View는 DB에 저장될때 수행하도록 한다.
 - kafka로 전송 받은 데이터는 모두 Redis에 저장해 인기글 Score 재 계산시 원본데이터 호출을 최대한 하지 않도록 한다.
-- Article, Comment, Like, View 서비스는 이벤트 발생시 EventPublisher로 발행하여 OutBox Table에 내역을 저장한다.
+- Article, Comment, Like, Hate, View 서비스는 이벤트 발생시 EventPublisher로 발행하여 OutBox Table에 내역을 저장한다.
   Transaction Commit 완료시 Kafka에 데이터를 전송하고 OutBox에 내역을 삭제한다.
 - HotArticle Service는 Kafka Consumer로 동작하여 데이터를 Redis에 저정 한다.
 - Redis에 저장된 데이터는 10일의 TTL을 가지고 있다.
 - 인기글 상세 데이터는 Redis가 아닌 실제 원본데이터를 조회하도록 한다.
 
 ### 흐름도
-![image](https://github.com/user-attachments/assets/24af429f-49f3-442b-9b06-80fb14083517)
+![image](https://github.com/user-attachments/assets/380eeba5-89c5-483c-8aee-c7cbbeac6a94)
 
 ### Repository
-![image](https://github.com/user-attachments/assets/56b647cf-265a-4cd2-822b-3428a1614855)
+![image](https://github.com/user-attachments/assets/b438061e-9064-45b2-b645-8396e9bd4068)
+
 
 ## Article Read Service
 
@@ -179,16 +180,16 @@ Intellij, Spring boot, Redis, Kafka, Docker, MySQL
 
 ### 상세 설계 내용
 
-- Article 생성, 삭제, Like, UnLike, Update 및 Comment 생성, 삭제 Event 발생시 해당 데이터를 ArticleModelQuery Object 를 JsonString 으로 변환해
-  Redis에 저장한다.
+- Article 생성, 삭제,  Update, Like, UnLike, Hate, UnHate 및 Comment 생성, 삭제 Event 발생시 해당 데이터를 ArticleModelQuery Object 를 JsonString 으로 변환해 Redis에 저장한다.
   Reids에 저장시 TTL은 1일로 지정한다.
-- Aritcle Id에 해당되는 데이터 조회시 Redis에서 ArticleQuerytModel을 전달 한다.   
+- Aritcle Id에 해당되는 데이터 조회시 Redis에서 ArticleQuerytModel을 전달 한다.
   데이터가 없을 경우 Rest Client로 원본 데이터를 호출하여 저장후 전달한다.
 - Article 생성, 삭제 Event 시 해당 id와 Board Id에 해당되는 Article Count수를 수정한다.
 - Article ID List 항목은 Redis에 최대 1000개만 저장하도록 한다.
 
+
 ### 흐름도
-![image](https://github.com/user-attachments/assets/2d230337-e28b-42d9-8df2-335620e862cd)
+![image](https://github.com/user-attachments/assets/7981f8ee-cec9-47ea-9a2c-63c03ef837fd)
 
 ### Repository
 ![image](https://github.com/user-attachments/assets/3476b757-363a-4cb4-a9cf-fa4e1b34e9da)
